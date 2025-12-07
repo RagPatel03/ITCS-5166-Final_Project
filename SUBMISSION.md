@@ -1,43 +1,39 @@
-# R03 Clean Energy App - Final Project
+# R03 Clean Energy App - Final Project Submission
+
 **Student:** Raghav Patel (801255003)  
 **Course:** ITCS/ITIS-5166  
-**Date:** December 2025
+**Date:** December 2025  
+**Live URL:** http://YOUR_DROPLET_IP
 
-## Project Overview
-A Single Page Application (SPA) showcasing recent innovations in clean energy technology, specifically a breakthrough copper-magnesium-iron catalyst for CO2 conversion developed by the Korea Institute of Energy Research.
+## Deployment Information
+- **DigitalOcean Droplet IP:** YOUR_DROPLET_IP
+- **Frontend:** Angular 18 on port 80
+- **Backend:** Node.js/Express on port 3000
+- **Database:** MySQL (mock implementation)
+- **Process Manager:** PM2 for 24/7 operation
 
-## Technology Stack
-- **Frontend:** Angular 18 (Standalone Components)
-- **Backend:** Node.js + Express
-- **Database:** MySQL (with mock implementation)
-- **Authentication:** JWT
-- **Charts:** Chart.js
-- **Deployment:** PM2 + NGINX
+## Access Instructions
+1. Open browser to: http://YOUR_DROPLET_IP
+2. Login with: **username:** raghav, **password:** raghav
+3. Explore dashboard and charts
 
-## Features Implemented
-1. ✅ JWT Authentication (username: raghav, password: raghav)
-2. ✅ Dashboard with 228-word summary
-3. ✅ Two dynamic charts (Summary & Reports pages)
-4. ✅ MySQL database integration (mock)
-5. ✅ Protected routes with auth guards
-6. ✅ WCAG 2.1 accessibility compliance
-7. ✅ Responsive design
-8. ✅ RESTful API with CORS support
+## Technical Requirements Met
+- [x] Single Page Application (Angular)
+- [x] Node.js backend with MySQL
+- [x] JWT authentication
+- [x] 200+ word clean energy summary
+- [x] Two dynamic charts with API data
+- [x] Protected routes with auth guards
+- [x] Accessible 24/7 on DigitalOcean
+- [x] PM2 process management
+- [x] NGINX reverse proxy
 
-## Installation & Deployment
+## Deployment Files
+- `deploy-digitalocean.sh` - Automated deployment script
+- `nginx.conf` - NGINX configuration
+- All source code in `backend/` and `frontend/`
 
-### Prerequisites
-- Node.js 18+
-- MySQL (optional - uses mock data)
-- PM2 (for deployment)
-
-### Quick Start
-1. Clone repository
-2. Run deployment script:
-   ```bash
-   # Windows
-   deploy.bat
-   
-   # Linux/Mac
-   chmod +x deploy.sh
-   ./deploy.sh
+## Source Article
+"Turning CO2 into clean fuel faster and cheaper"  
+ScienceDaily, November 5, 2025  
+https://www.sciencedaily.com/releases/2025/11/251105050712.htm
