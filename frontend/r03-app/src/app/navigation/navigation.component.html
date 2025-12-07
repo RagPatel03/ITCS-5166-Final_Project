@@ -1,0 +1,112 @@
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <!-- Logo/Brand -->
+    <div class="nav-brand">
+      <a routerLink="/dashboard" class="brand-link" aria-label="R03 Dashboard">
+        <span class="brand-icon" aria-hidden="true">🌱</span>
+        <span class="brand-text">R03 - Clean Energy</span>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="menu-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-label="Toggle navigation menu"
+      aria-controls="nav-menu"
+    >
+      <span class="hamburger" [class.active]="isMenuOpen" aria-hidden="true">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
+
+    <!-- Navigation Menu -->
+    <div
+      class="nav-menu"
+      id="nav-menu"
+      [class.active]="isMenuOpen"
+      role="menu"
+    >
+      <!-- Welcome Message -->
+      <div class="welcome-message" role="none">
+        <span class="welcome-text">Welcome,</span>
+        <span class="username" aria-label="Current user">
+          {{ getCurrentUser()?.name || 'User' }}
+        </span>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" role="menubar">
+        <li role="none">
+          <a
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link"
+            role="menuitem"
+            (click)="closeMenu()"
+            aria-label="Go to Dashboard"
+          >
+            <span class="nav-icon" aria-hidden="true">📊</span>
+            Dashboard
+          </a>
+        </li>
+
+        <li role="none">
+          <a
+            routerLink="/summary"
+            routerLinkActive="active"
+            class="nav-link"
+            role="menuitem"
+            (click)="closeMenu()"
+            aria-label="Go to Summary with chart"
+          >
+            <span class="nav-icon" aria-hidden="true">📈</span>
+            Summary Chart
+          </a>
+        </li>
+
+        <li role="none">
+          <a
+            routerLink="/reports"
+            routerLinkActive="active"
+            class="nav-link"
+            role="menuitem"
+            (click)="closeMenu()"
+            aria-label="Go to Reports with chart"
+          >
+            <span class="nav-icon" aria-hidden="true">📋</span>
+            Reports Chart
+          </a>
+        </li>
+
+        <!-- Logout Button -->
+        <li role="none" class="logout-item">
+          <button
+            (click)="logout()"
+            class="logout-button"
+            role="menuitem"
+            aria-label="Logout from application"
+          >
+            <span class="logout-icon" aria-hidden="true">🚪</span>
+            Logout
+          </button>
+        </li>
+      </ul>
+
+      <!-- Database Status -->
+      <div class="nav-status" role="status" aria-live="polite">
+        <div class="status-dot" aria-hidden="true"></div>
+        <span class="status-text">MySQL Connected</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Backdrop for mobile menu -->
+@if (isMenuOpen) {
+  <div class="menu-backdrop" (click)="closeMenu()" role="presentation"></div>
+}

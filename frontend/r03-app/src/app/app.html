@@ -1,0 +1,14 @@
+<!-- Accessibility skip link -->
+<a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+
+<div class="app-container">
+  <!-- Navigation - Only show when logged in -->
+  @if (isLoggedIn()) {
+    <app-navigation></app-navigation>
+  }
+
+  <!-- Main Content Area -->
+  <main id="main-content" class="main-content" role="main" [class.with-nav]="isLoggedIn()">
+    <router-outlet></router-outlet>
+  </main>
+</div>

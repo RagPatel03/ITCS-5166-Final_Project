@@ -1,0 +1,95 @@
+<div class="login-container" role="main" aria-labelledby="login-title">
+  <div class="login-card">
+    <!-- Accessibility: Heading for screen readers -->
+    <h1 id="login-title" class="login-title" tabindex="-1">R03 Clean Energy App</h1>
+    <h2 class="login-subtitle">Login to Access Dashboard</h2>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form" aria-labelledby="login-title">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="username" class="form-label">
+          Username
+          <span class="required-asterisk" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="username"
+          required
+          autocomplete="username"
+          class="form-input"
+          placeholder="Enter username"
+          aria-required="true"
+          aria-describedby="username-help"
+          [attr.aria-invalid]="errorMessage ? 'true' : null"
+          #usernameInput
+        >
+        <small id="username-help" class="form-help">
+          Use your first name as username (testing: "raghav")
+        </small>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password" class="form-label">
+          Password
+          <span class="required-asterisk" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          autocomplete="current-password"
+          class="form-input"
+          placeholder="Enter password"
+          aria-required="true"
+          aria-describedby="password-help"
+          [attr.aria-invalid]="errorMessage ? 'true' : null"
+        >
+        <small id="password-help" class="form-help">
+          Use your first name as password (testing: "raghav")
+        </small>
+      </div>
+
+      <!-- Error Message -->
+      @if (errorMessage) {
+        <div class="error-message" role="alert" aria-live="assertive">
+          <span class="error-icon" aria-hidden="true">⚠</span>
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="login-button"
+        [disabled]="loading || !username.trim() || !password.trim()"
+        aria-busy="{{loading}}"
+      >
+        @if (loading) {
+          <span class="spinner" aria-hidden="true"></span>
+          <span>Logging in...</span>
+        } @else {
+          <span>Login</span>
+        }
+      </button>
+
+      <!-- Testing Instructions -->
+      <div class="testing-info" role="note" aria-label="Testing instructions">
+        <h3 class="info-title">Testing Credentials:</h3>
+        <p><strong>Username:</strong> raghav</p>
+        <p><strong>Password:</strong> raghav</p>
+        <p class="info-note">(Using JWT authentication with hardcoded credentials)</p>
+      </div>
+    </form>
+
+    <!-- Database Status -->
+    <div class="db-status">
+      <div class="status-indicator status-active"></div>
+      <span>Backend: Running on port 3000</span>
+    </div>
+  </div>
+</div>

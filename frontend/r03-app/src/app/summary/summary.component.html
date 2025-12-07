@@ -1,0 +1,251 @@
+<div class="summary-container" role="main" aria-labelledby="summary-page-title">
+
+  <!-- Loading State -->
+  @if (loading) {
+    <div class="loading-container" role="status" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading chart data...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error && !loading) {
+    <div class="error-container" role="alert" aria-live="assertive">
+      <div class="error-icon" aria-hidden="true">⚠</div>
+      <h2>Error Loading Chart</h2>
+      <p>{{ error }}</p>
+      <button class="retry-button" (click)="loadChartData()" aria-label="Retry loading chart data">
+        Retry
+      </button>
+    </div>
+  }
+
+  <!-- Chart Content -->
+  @if (chartData && !loading && !error) {
+    <div class="chart-content">
+      <!-- Page Header -->
+      <header class="page-header">
+        <h1 id="summary-page-title" class="page-title">
+          <span class="page-icon" aria-hidden="true">📈</span>
+          Summary: Catalyst Performance Analysis
+        </h1>
+        <p class="page-subtitle">Dynamic chart showing CO2 conversion catalyst performance at 400°C</p>
+      </header>
+
+      <div class="chart-layout">
+        <!-- Chart Card -->
+        <section class="chart-card" aria-labelledby="chart-title">
+          <div class="card-header">
+            <div class="chart-header-content">
+              <h2 id="chart-title" class="chart-title">{{ chartData.title }}</h2>
+              <p class="chart-description">{{ chartData.description }}</p>
+            </div>
+
+            <div class="chart-actions">
+              <button
+                class="action-button download-button"
+                (click)="downloadChart()"
+                aria-label="Download chart as PNG image"
+              >
+                <span class="button-icon" aria-hidden="true">💾</span>
+                Download
+              </button>
+
+              <button
+                class="action-button refresh-button"
+                (click)="loadChartData()"
+                aria-label="Refresh chart data"
+              >
+                <span class="button-icon" aria-hidden="true">🔄</span>
+                Refresh
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <!-- Chart Container -->
+            <div class="chart-container" role="region" aria-label="Interactive chart area">
+              <canvas
+                #chartCanvas
+                id="summaryChart"
+                width="800"
+                height="400"
+                role="img"
+                [attr.aria-label]="chartData.title + '. ' + chartData.description"
+                tabindex="0"
+              ></canvas>
+
+              <!-- Chart Accessibility Fallback -->
+              <div class="chart-data-table" role="region" aria-label="Data table for chart">
+                <h3 class="table-title">Data Table for Screen Readers</h3>
+                <table class="data-table">
+                  <caption>Catalyst Performance Data</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Catalyst Type</th>
+                      <th scope="col">CO Formation Rate (μmol·gcat⁻¹·s⁻¹)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (label of chartData.data.labels; track $index) {
+                      <tr>
+                        <th scope="row">{{ label }}</th>
+                        <td>{{ chartData.data.datasets[0].data[$index] }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Chart Legend -->
+            <div class="chart-legend" role="list" aria-label="Chart color legend">
+              <h3 class="legend-title">Color Legend</h3>
+              <div class="legend-items">
+                @for (label of chartData.data.labels; track $index; let i = $index) {
+                  <div class="legend-item" role="listitem">
+                    <span
+                      class="legend-color"
+                      [style.backgroundColor]="chartData.data.datasets[0].backgroundColor[i]"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="legend-label">{{ label }}</span>
+                    <span class="legend-value">{{ chartData.data.datasets[0].data[i] }} μmol·gcat⁻¹·s⁻¹</span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Explanation Section -->
+        <section class="explanation-card" aria-labelledby="explanation-title">
+          <div class="card-header">
+            <h2 id="explanation-title" class="card-title">
+              <span class="card-icon" aria-hidden="true">📊</span>
+              Chart Analysis & Explanation
+            </h2>
+          </div>
+
+          <div class="card-body">
+            <div class="explanation-content">
+              <p class="explanation-text">{{ chartData.explanation }}</p>
+
+              <div class="key-insights">
+                <h3 class="insights-title">Key Insights:</h3>
+                <ul class="insights-list">
+                  <li>
+                    <strong>KIER Cu-Mg-Fe Catalyst:</strong> Shows 1.7x higher formation rate than standard copper catalysts
+                  </li>
+                  <li>
+                    <strong>Platinum Comparison:</strong> Outperforms expensive platinum by 2.2x despite lower cost
+                  </li>
+                  <li>
+                    <strong>Temperature Advantage:</strong> Operates efficiently at 400°C vs traditional 800°C+
+                  </li>
+                  <li>
+                    <strong>Cost Efficiency:</strong> Uses abundant copper instead of rare metals
+                  </li>
+                </ul>
+              </div>
+
+              <div class="data-source">
+                <h3 class="source-title">Data Source & Methodology:</h3>
+                <div class="source-details">
+                  <p><strong>Research Source:</strong> Applied Catalysis B: Environmental and Energy (2025)</p>
+                  <p><strong>Data Type:</strong> Experimental results from Korea Institute of Energy Research</p>
+                  <p><strong>Measurement:</strong> CO formation rate at 400°C, atmospheric pressure</p>
+                  <p><strong>Stability Test:</strong> Maintained performance for 100+ continuous hours</p>
+                </div>
+              </div>
+
+              <div class="technical-notes">
+                <h3 class="notes-title">Technical Implementation:</h3>
+                <div class="notes-content">
+                  <p>This chart is dynamically generated using <strong>Chart.js</strong> with data fetched from the backend API. The chart updates in real-time and includes accessibility features for screen readers.</p>
+                  <div class="tech-details">
+                    <span class="tech-detail">Chart Type: Bar Chart</span>
+                    <span class="tech-detail">Data Format: JSON</span>
+                    <span class="tech-detail">API Endpoint: /api/summary-chart</span>
+                    <span class="tech-detail">Authentication: JWT Protected</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Data Details -->
+        <section class="data-card" aria-labelledby="data-details-title">
+          <div class="card-header">
+            <h2 id="data-details-title" class="card-title">
+              <span class="card-icon" aria-hidden="true">🔢</span>
+              Numerical Data Details
+            </h2>
+          </div>
+
+          <div class="card-body">
+            <div class="data-details">
+              <!-- Performance Metrics -->
+              <div class="metrics-grid">
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <h3 class="metric-title">Best Performance</h3>
+                    <span class="metric-icon" aria-hidden="true">🏆</span>
+                  </div>
+                  <div class="metric-value">{{ chartData.data.datasets[0].data[0] }}</div>
+                  <div class="metric-label">μmol·gcat⁻¹·s⁻¹</div>
+                  <div class="metric-catalyst">KIER Cu-Mg-Fe</div>
+                </div>
+
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <h3 class="metric-title">Performance Gain</h3>
+                    <span class="metric-icon" aria-hidden="true">📈</span>
+                  </div>
+                  <div class="metric-value">1.7x</div>
+                  <div class="metric-label">vs Standard Copper</div>
+                  <div class="metric-description">Higher formation rate</div>
+                </div>
+
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <h3 class="metric-title">Cost Efficiency</h3>
+                    <span class="metric-icon" aria-hidden="true">💰</span>
+                  </div>
+                  <div class="metric-value">2.2x</div>
+                  <div class="metric-label">vs Platinum</div>
+                  <div class="metric-description">Better performance, lower cost</div>
+                </div>
+
+                <div class="metric-card">
+                  <div class="metric-header">
+                    <h3 class="metric-title">Temperature</h3>
+                    <span class="metric-icon" aria-hidden="true">🌡️</span>
+                  </div>
+                  <div class="metric-value">400°C</div>
+                  <div class="metric-label">Operating Temp</div>
+                  <div class="metric-description">50% lower than traditional</div>
+                </div>
+              </div>
+
+              <!-- Data Summary -->
+              <div class="data-summary">
+                <h3 class="summary-title">Data Summary:</h3>
+                <div class="summary-content">
+                  <p>The KIER catalyst demonstrates breakthrough performance in CO2 conversion efficiency, achieving commercial viability through:</p>
+                  <ul>
+                    <li>Higher reaction rates at lower temperatures</li>
+                    <li>Elimination of methane byproduct formation</li>
+                    <li>Improved thermal stability through layered structure</li>
+                    <li>Cost reduction using abundant materials</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  }
+</div>
