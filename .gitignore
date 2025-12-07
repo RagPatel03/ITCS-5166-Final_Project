@@ -1,5 +1,254 @@
-"node_modules/" 
-".env" 
-"dist/" 
-".angular/" 
-"*.log" 
+# ========================
+# R03 Clean Energy App
+# Git Ignore File
+# ========================
+
+# Dependencies
+node_modules/
+.npm
+.pnpm
+.yarn/
+yarn.lock
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.lock-wscript
+
+# Production builds
+dist/
+build/
+out/
+.output/
+.cache/
+
+# Angular specific
+.angular/
+.aot/
+.ng/
+.ng_pkg_build/
+.storybook/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS files
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+*.lcov
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# Vue / Nuxt
+/public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Temporary folders
+tmp/
+temp/
+.tmp/
+.temp/
+
+# System files
+*.sys
+*.dmp
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.pyc
+__pycache__/
+
+# Archives
+*.7z
+*.bz2
+*.gz
+*.iso
+*.rar
+*.tar
+*.tar.gz
+*.xz
+*.zip
+
+# Media files
+*.mp3
+*.mp4
+*.avi
+*.mov
+*.wav
+*.flac
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.svg
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Certificate files
+*.pem
+*.crt
+*.key
+
+# Documentation
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+
+# VS Code
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.history/
+
+# Windows
+ehthumbs.db
+Thumbs.db
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# KDE
+.directory
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# ========================
+# Project Specific
+# ========================
+
+# Frontend
+frontend/r03-app/dist/
+frontend/r03-app/.angular/
+
+# Backend
+backend/.env
+backend/logs/
+
+# PM2
+.pm2/
+.pm2/logs/
+
+# MySQL
+*.ibd
+*.frm
+*.myd
+*.myi
+*.trg
